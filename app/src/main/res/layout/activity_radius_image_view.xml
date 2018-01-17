@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sml.mass.RadiusImageView.RadiusImageViewActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_launcher_background"
+                app:shape="rectangle" />
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_launcher_background"
+                app:shape="oval" />
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_launcher_background"
+                app:roundRadius="12dp"
+                app:shape="round_rectangle" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/color_drawable_example"
+                app:shape="rectangle" />
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/color_drawable_example"
+                app:shape="oval" />
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/color_drawable_example"
+                app:roundRadius="12dp"
+                app:shape="round_rectangle" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:id="@+id/leftTop"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                app:leftTopRadius="24dp"
+                app:shape="round_rectangle" />
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:id="@+id/leftBottom"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                app:leftBottomRadius="24dp"
+                app:shape="round_rectangle" />
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:id="@+id/rightTop"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/leftTop"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                app:rightTopRadius="24dp"
+                app:shape="round_rectangle" />
+
+            <com.sml.mass.RadiusImageView.RadiusImageView
+                android:id="@+id/rightBottom"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/leftBottom"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                app:rightBottomRadius="24dp"
+                app:shape="round_rectangle" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="START CUSTOMIZE"
+            android:textAllCaps="false"
+            android:textSize="10dp" />
+
+        <com.sml.mass.RadiusImageView.RadiusImageView
+            android:id="@+id/custom"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_launcher_background" />
+    </LinearLayout>
+</ScrollView>

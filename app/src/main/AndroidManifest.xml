@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".ImageSpannable.ImageSpannableActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ImageSpannable.ImageSpannableActivity"></activity>
+        <activity android:name=".RecyclerView.RecyclerViewActivity"></activity>
+        <activity android:name=".RadiusImageView.RadiusImageViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

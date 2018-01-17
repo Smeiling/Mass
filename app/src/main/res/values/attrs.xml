@@ -7,4 +7,19 @@
         <attr name="tailTextColor" format="color" />
         <attr name="canFoldAgain" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="RadiusImageView">
+        <attr name="shape" format="enum">
+            <enum name="rectangle" value="1" />
+            <enum name="oval" value="2" />
+            <enum name="round_rectangle" value="3" />
+        </attr>
+        <attr name="roundRadius" format="dimension" />
+        <attr name="leftTopRadius" format="dimension" />
+        <attr name="leftBottomRadius" format="dimension" />
+        <attr name="rightTopRadius" format="dimension" />
+        <attr name="rightBottomRadius" format="dimension" />
+        <attr name="borderWidth" format="dimension" />
+        <attr name="borderColor" format="color" />
+    </declare-styleable>
 </resources>
