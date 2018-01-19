@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Mass</string>
+    <string name="widgets_description">以下将展示自定义控件能力，控件样式仅供参考，开发者可根据自身需求配置自定义属性，具体属性参数详见开发文档。</string>
 </resources>

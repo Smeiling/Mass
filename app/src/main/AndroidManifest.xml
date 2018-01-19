@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".ImageSpannable.ImageSpannableActivity"></activity>
-        <activity android:name=".RecyclerView.RecyclerViewActivity"></activity>
+        <activity android:name=".ImageSpannable.ImageSpannableActivity" />
+        <activity android:name=".RecyclerView.RecyclerViewActivity" />
         <activity android:name=".RadiusImageView.RadiusImageViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ConstraintLayout.ConstraintActivity"></activity>
     </application>
 
 </manifest>
