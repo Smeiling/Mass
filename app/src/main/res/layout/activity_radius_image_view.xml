@@ -116,20 +116,28 @@
                 app:shape="round_rectangle" />
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="START CUSTOMIZE"
-            android:textAllCaps="false"
-            android:textSize="10dp" />
+        <!--<Button-->
+        <!--android:id="@+id/btn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:text="START CUSTOMIZE"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textSize="10dp" />-->
 
-        <com.sml.mass.RadiusImageView.RadiusImageView
-            android:id="@+id/custom"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_launcher_background" />
+        <!--<com.sml.mass.RadiusImageView.RadiusImageView-->
+        <!--android:id="@+id/custom"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:src="@drawable/ic_launcher_background" />-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+
+        <!--</LinearLayout>-->
     </LinearLayout>
 </ScrollView>

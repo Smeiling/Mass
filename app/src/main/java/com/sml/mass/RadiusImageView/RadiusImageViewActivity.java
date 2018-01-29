@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.sml.mass.R;
 
@@ -14,12 +15,27 @@ public class RadiusImageViewActivity extends AppCompatActivity {
     private Button btn;
     private int count = 0;
 
+    private LinearLayout container;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radius_image_view);
-        custom = findViewById(R.id.custom);
+        /*custom = findViewById(R.id.custom);
         btn = findViewById(R.id.btn);
+
+        container = findViewById(R.id.container);
+
+        RadiusImageView radiusImageView = new RadiusImageView(this);
+        radiusImageView.setImageResource(R.drawable.ic_launcher_background);
+        radiusImageView.setShapeType(RadiusImageView.SHAPE_ROUND_RECT);
+        radiusImageView.setRightTopRadius(24);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(120, 120);
+        radiusImageView.setLayoutParams(params);
+
+        container.addView(radiusImageView);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +86,6 @@ public class RadiusImageViewActivity extends AppCompatActivity {
                     count = 0;
                 }
             }
-        });
+        });*/
     }
 }

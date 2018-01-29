@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
@@ -16,17 +18,23 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.sml.mass.R;
 
 /**
- * Created by Smeiling on 2018/1/17.
+ * @Author: Smeiling
+ * @Date: 2018-01-22
+ * @Description: Upgraded ImageView support corner radius customization.
  */
-
 public class RadiusImageView extends AppCompatImageView {
 
     private static final int COLOR_DRAWABLE_DIMEN = 2;
 
+    /**
+     * Supported shapes
+     */
     public static final int SHAPE_RECTANGLE = 1;
     public static final int SHAPE_OVAL = 2;
     public static final int SHAPE_ROUND_RECT = 3;
@@ -41,13 +49,15 @@ public class RadiusImageView extends AppCompatImageView {
     /**
      * Uniform radius
      *
-     * @default 0
-     * if roundRadius value exists, single corner radius will be invalid
+     * @default 0px
+     * If roundRadius value exists, single corner radius will be invalid
      */
     private int roundRadius;
 
     /**
      * Single corner radius
+     *
+     * @default 0px
      */
     private int leftTopRadius;
     private int leftBottomRadius;
@@ -65,9 +75,23 @@ public class RadiusImageView extends AppCompatImageView {
     private int borderWidth = 0;
     private int borderColor = 0xFFEEEEEE;
 
+    /**
+     * Draw image
+     */
     private BitmapShader mBitmapShader;
     private Paint mBitmapPaint;
     private Bitmap mBitmap;
+    private Matrix mMatrix;
+    private RectF rectF;
+    private Path path;
+
+    /**
+     * ImageView size
+     */
+    private int mWidth;
+    private int mHeight;
+
+    private boolean mNeedResetShader = false;
 
     public RadiusImageView(Context context) {
         this(context, null);
@@ -79,7 +103,14 @@ public class RadiusImageView extends AppCompatImageView {
 
     public RadiusImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        // ImageView set default ScaleType as FIT_CENTER, but FIT_CENTER is not valid in RadiusImageView
+        if (getScaleType() == ImageView.ScaleType.FIT_CENTER) {
+            // Set default ScaleType as CENTER_CROP
+            setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RadiusImageView);
+
         shapeType = array.getInt(R.styleable.RadiusImageView_shape, SHAPE_RECTANGLE);
         roundRadius = array.getDimensionPixelSize(R.styleable.RadiusImageView_roundRadius, 0);
         if (roundRadius <= 0) {
@@ -88,13 +119,16 @@ public class RadiusImageView extends AppCompatImageView {
             rightTopRadius = array.getDimensionPixelSize(R.styleable.RadiusImageView_rightTopRadius, 0);
             rightBottomRadius = array.getDimensionPixelSize(R.styleable.RadiusImageView_rightBottomRadius, 0);
         } else {
-            leftTopRadius = roundRadius;
-            leftBottomRadius = roundRadius;
-            rightTopRadius = roundRadius;
-            rightBottomRadius = roundRadius;
+            leftTopRadius = leftBottomRadius = rightTopRadius = rightBottomRadius = roundRadius;
         }
         borderWidth = array.getDimensionPixelSize(R.styleable.RadiusImageView_borderWidth, 0);
         borderColor = array.getColor(R.styleable.RadiusImageView_borderColor, 0xFFEEEEEE);
+
+        array.recycle();
+
+        mMatrix = new Matrix();
+        path = new Path();
+        rectF = new RectF();
     }
 
     @Override
@@ -122,25 +156,131 @@ public class RadiusImageView extends AppCompatImageView {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    public void setScaleType(ImageView.ScaleType scaleType) {
+        if (scaleType == ImageView.ScaleType.CENTER_INSIDE || scaleType == ImageView.ScaleType.FIT_START
+                || scaleType == ImageView.ScaleType.FIT_CENTER || scaleType == ImageView.ScaleType.FIT_END) {
+            throw new IllegalArgumentException(String.format("ScaleType %s is not supported in RadiusImageView", scaleType));
+        }
+        super.setScaleType(scaleType);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int width = getMeasuredWidth();
+        int height = getMeasuredHeight();
+
         if (shapeType == SHAPE_OVAL) {
+            int size = Math.min(width, height);
+            setMeasuredDimension(size, size);
+        } else {
+            int widthMode = View.MeasureSpec.getMode(widthMeasureSpec);
+            int heightMode = View.MeasureSpec.getMode(heightMeasureSpec);
+            if (mBitmap == null) {
+                return;
+            }
+            if (widthMode == View.MeasureSpec.AT_MOST || widthMode == View.MeasureSpec.UNSPECIFIED
+                    || heightMode == View.MeasureSpec.AT_MOST || heightMode == View.MeasureSpec.UNSPECIFIED) {
+                float bmWidth = mBitmap.getWidth();
+                float bmHeight = mBitmap.getHeight();
+                if (getScaleX() == getScaleY()) {
+                    setMeasuredDimension(width, (int) (bmHeight * getScaleX()));
+                } else {
+                    setMeasuredDimension((int) (bmWidth * getScaleY()), height);
+                }
+            }
+        }
+    }
+
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        if (mBitmapPaint == null) {
+            mBitmapPaint = new Paint();
+            mBitmapPaint.setColor(Color.TRANSPARENT);
+            mBitmapPaint.setAntiAlias(true);
+        }
+        if (shapeType == SHAPE_OVAL) {
+            updateBitmapShader();
             int radius = getWidth() > getHeight() ? getHeight() / 2 : getWidth() / 2;
             canvas.drawCircle(radius, radius, radius, mBitmapPaint);
         } else if (shapeType == SHAPE_ROUND_RECT) {
             if (roundRadius > 0) {
-                canvas.drawRoundRect(new RectF(0, 0, getWidth(), getHeight()), roundRadius, roundRadius, mBitmapPaint);
+                updateBitmapShader();
+                rectF.set(0, 0, getWidth(), getHeight());
+                canvas.drawRoundRect(rectF, roundRadius, roundRadius, mBitmapPaint);
             } else {
+                // Single corner customization
                 setupPathValue();
-                Path path = new Path();
-                path.addRoundRect(new RectF(0, 0, getWidth(), getHeight()), rids, Path.Direction.CW);
+                rectF.set(0, 0, getWidth(), getHeight());
+                path.addRoundRect(rectF, rids, Path.Direction.CW);
                 canvas.clipPath(path);
                 super.onDraw(canvas);
             }
         } else {
             // Default shape is rectangle
-            canvas.drawRect(new RectF(0, 0, getWidth(), getHeight()), mBitmapPaint);
+            updateBitmapShader();
+            rectF.set(0, 0, getWidth(), getHeight());
+            canvas.drawRect(rectF, mBitmapPaint);
         }
         drawBorder(shapeType, canvas);
+    }
+
+
+    /**
+     * Resize bitmap and update bitmap shader
+     */
+    private void updateBitmapShader() {
+        if (mWidth != getWidth() || mHeight != getHeight() || mNeedResetShader) {
+            mWidth = getWidth();
+            mHeight = getHeight();
+
+            mMatrix.reset();
+            mNeedResetShader = false;
+            if (mBitmapShader == null || mBitmap == null) {
+                return;
+            }
+
+            // Resize bitmap with scaleType option
+            final float bmWidth = mBitmap.getWidth();
+            final float bmHeight = mBitmap.getHeight();
+            final float scaleX = mWidth / bmWidth;
+            final float scaleY = mHeight / bmHeight;
+            if (getScaleType() == ImageView.ScaleType.MATRIX) {
+            } else if (getScaleType() == ImageView.ScaleType.CENTER) {
+                mMatrix.postTranslate(-(mBitmap.getWidth() - mWidth) / 2, -(mBitmap.getHeight() - mHeight) / 2);
+            } else if (getScaleType() == ImageView.ScaleType.CENTER_INSIDE) {
+                final float scale = Math.min(scaleX, scaleY);
+                mMatrix.setScale(scale, scale);
+                mMatrix.postTranslate(-(scale * bmWidth - mWidth) / 2, -(scale * bmHeight - mHeight) / 2);
+            } else if (getScaleType() == ImageView.ScaleType.CENTER_CROP) {
+                final float scale = Math.max(scaleX, scaleY);
+                mMatrix.setScale(scale, scale);
+                mMatrix.postTranslate(-(scale * bmWidth - mWidth) / 2, -(scale * bmHeight - mHeight) / 2);
+            } else if (getScaleType() == ImageView.ScaleType.FIT_XY) {
+                mMatrix.setScale(scaleX, scaleY);
+            } else {
+                final float scale = Math.min(scaleX, scaleY);
+                mMatrix.setScale(scale, scale);
+                if (getScaleType() == ImageView.ScaleType.FIT_START) {
+                    mMatrix.postTranslate(0, 0);
+                } else if (getScaleType() == ImageView.ScaleType.FIT_CENTER) {
+                    if (mWidth > mHeight) {
+                        mMatrix.postTranslate(-(scale * bmWidth - mWidth) / 2, 0);
+                    } else {
+                        mMatrix.postTranslate(0, -(scale * bmHeight - mHeight) / 2);
+                    }
+                } else if (getScaleType() == ImageView.ScaleType.FIT_END) {
+                    if (mWidth > mHeight) {
+                        mMatrix.postTranslate(-(scale * bmWidth - mWidth), 0);
+                    } else {
+                        mMatrix.postTranslate(0, -(scale * bmHeight - mHeight));
+                    }
+                }
+            }
+            mBitmapShader.setLocalMatrix(mMatrix);
+            mBitmapPaint.setShader(mBitmapShader);
+        }
     }
 
     /**
@@ -189,11 +329,11 @@ public class RadiusImageView extends AppCompatImageView {
             return;
         }
 
+        mNeedResetShader = true;
+
         mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-        if (mBitmapPaint == null) {
-            mBitmapPaint = new Paint();
-            mBitmapPaint.setAntiAlias(true);
-        }
+        mBitmapPaint = new Paint();
+        mBitmapPaint.setAntiAlias(true);
 
         mBitmapPaint.setShader(mBitmapShader);
         requestLayout();
@@ -201,7 +341,7 @@ public class RadiusImageView extends AppCompatImageView {
     }
 
     /**
-     * Get bitmap
+     * Get bitmap from parent ImageView
      *
      * @return target bitmap
      */
@@ -244,53 +384,87 @@ public class RadiusImageView extends AppCompatImageView {
     }
 
     /**
-     * Setters
+     * Set shape of ImageView
+     *
+     * @Default rectangle
      */
     public void setShapeType(int shapeType) {
         this.shapeType = shapeType;
         invalidate();
     }
 
+    /**
+     * Set round rectangle radius
+     *
+     * @param roundRadius
+     * @Default 0
+     */
     public void setRoundRadius(int roundRadius) {
         if (roundRadius > 0) {
             this.roundRadius = roundRadius;
-            leftTopRadius = leftBottomRadius = rightTopRadius = rightBottomRadius = 0;
+            leftTopRadius = leftBottomRadius = rightTopRadius = rightBottomRadius = roundRadius;
             invalidate();
         }
     }
 
+    /**
+     * Set round rectangle left-top radius
+     *
+     * @param leftTopRadius
+     */
     public void setLeftTopRadius(int leftTopRadius) {
         if (leftTopRadius > 0) {
-            this.roundRadius = 0;
+            this.roundRadius = 0; // Invalidate roundRadius
             this.leftTopRadius = leftTopRadius;
             invalidate();
         }
     }
 
+    /**
+     * Set round rectangle left-bottom radius
+     *
+     * @param leftBottomRadius
+     */
     public void setLeftBottomRadius(int leftBottomRadius) {
         if (leftBottomRadius > 0) {
-            this.roundRadius = 0;
+            this.roundRadius = 0; // Invalidate roundRadius
             this.leftBottomRadius = leftBottomRadius;
             invalidate();
         }
     }
 
+    /**
+     * Set round rectangle right-top radius
+     *
+     * @param rightTopRadius
+     */
     public void setRightTopRadius(int rightTopRadius) {
         if (rightTopRadius > 0) {
-            this.roundRadius = 0;
+            this.roundRadius = 0; // Invalidate roundRadius
             this.rightTopRadius = rightTopRadius;
             invalidate();
         }
     }
 
+    /**
+     * Set round rectangle right-bottom radius
+     *
+     * @param rightBottomRadius
+     */
     public void setRightBottomRadius(int rightBottomRadius) {
         if (rightBottomRadius > 0) {
-            this.roundRadius = 0;
+            this.roundRadius = 0; // Invalidate roundRadius
             this.rightBottomRadius = rightBottomRadius;
             invalidate();
         }
     }
 
+    /**
+     * Set border width
+     * Border is not supported when single corner radius is set
+     *
+     * @param borderWidth
+     */
     public void setBorderWidth(int borderWidth) {
         if (borderWidth > 0) {
             this.borderWidth = borderWidth;
@@ -298,8 +472,20 @@ public class RadiusImageView extends AppCompatImageView {
         }
     }
 
+    /**
+     * Set border color
+     *
+     * @param borderColor
+     */
     public void setBorderColor(int borderColor) {
         this.borderColor = borderColor;
         invalidate();
+    }
+
+    /**
+     * 清空边框
+     */
+    public void clearBorder() {
+        setBorderColor(Color.TRANSPARENT);
     }
 }
