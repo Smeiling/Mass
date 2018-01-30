@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Mass</string>
-    <string name="widgets_description">以下将展示自定义控件能力，控件样式仅供参考，开发者可根据自身需求配置自定义属性，具体属性参数详见开发文档。</string>
+    <string name="components_description">以下将展示自定义控件能力，控件样式仅供参考，开发者可根据自身需求配置自定义属性，具体属性参数详见开发文档。</string>
+    <string name="rectangle_image_view">设置shape属性为rectangle，显示正常矩形，与原生ImageView相同。</string>
+    <string name="oval_image_view">设置shape属性为oval，图片显示为圆形，宽度与高度不一致时，Radius为短边长度的一半。</string>
+    <string name="round_rect_image_view">设置shape属性为round_rectangle，显示圆角矩形，可自定义四个角的Radius。</string>
+    <string name="border_image_view">支持为图片添加边框，可自定义边框的宽度及颜色。「对于圆角矩形，当四个角的Radius不一样时，不支持添加边框。」
+    </string>
+    <string name="label_radius_image_view">RadiusImageView</string>
+    <string name="image_view_scale_type">
+        共支持4种ScaleType，包括CENTER、CENTER_CROP、MATRIX、FIT_XY，默认值为CENTER_CROP。
+    </string>
+    <string name="radius_image_view_code">使用Java代码创建RadiusImageView实例。\n点我试试～</string>
 </resources>

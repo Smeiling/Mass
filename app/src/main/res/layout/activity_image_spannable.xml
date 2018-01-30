@@ -20,7 +20,7 @@
         android:layout_marginBottom="20dp"
         android:text="Add Image Span" />
 
-    <com.sml.mass.ImageSpannable.FolderTextView
+    <com.sml.mass.components.basic.FolderTextView
         android:id="@+id/folder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         app:tailTextColor="@color/colorAccent"
         app:unFoldText="展开" />
 
-    <com.sml.mass.ImageSpannable.FolderTextView
+    <com.sml.mass.components.basic.FolderTextView
         android:id="@+id/folder2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

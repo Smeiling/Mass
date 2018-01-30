@@ -8,6 +8,7 @@ public class WidgetItem {
 
     private String widgetName;
     private int widgetIcon;
+    private String className;
 
 
     public String getWidgetName() {
@@ -24,5 +25,13 @@ public class WidgetItem {
 
     public void setWidgetIcon(int widgetIcon) {
         this.widgetIcon = widgetIcon;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 }

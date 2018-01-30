@@ -4,140 +4,156 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sml.mass.RadiusImageView.RadiusImageViewActivity">
+    tools:context="com.sml.mass.activity.RadiusImageViewActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/ic_launcher_background"
-                app:shape="rectangle" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:gravity="center"
+                android:text="@string/label_radius_image_view"
+                android:textStyle="bold" />
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_launcher_background"
-                app:shape="oval" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="20dp"
+                android:background="#333333" />
+        </LinearLayout>
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_launcher_background"
-                app:roundRadius="12dp"
-                app:shape="round_rectangle" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
+            android:padding="16dp">
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+            <com.sml.mass.components.basic.RadiusImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/color_drawable_example"
+                android:src="@drawable/kitty"
                 app:shape="rectangle" />
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/color_drawable_example"
-                app:shape="oval" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/rectangle_image_view" />
+        </LinearLayout>
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/color_drawable_example"
-                app:roundRadius="12dp"
-                app:shape="round_rectangle" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
+            android:padding="16dp">
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:id="@+id/leftTop"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                app:leftTopRadius="24dp"
+            <com.sml.mass.components.basic.RadiusImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/kitty"
+                app:shape="oval" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/oval_image_view" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
+            android:padding="16dp">
+
+            <com.sml.mass.components.basic.RadiusImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/kitty"
+                app:roundRadius="4dp"
                 app:shape="round_rectangle" />
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:id="@+id/leftBottom"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                app:leftBottomRadius="24dp"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/round_rect_image_view" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
+            android:padding="16dp">
+
+            <com.sml.mass.components.basic.RadiusImageView
+                android:id="@+id/glide"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/kitty"
+                app:borderColor="#3399FF"
+                app:borderWidth="4dp"
+                app:shape="oval" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/border_image_view" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
+            android:padding="16dp">
+
+
+            <com.sml.mass.components.basic.RadiusImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:scaleType="center"
+                android:src="@drawable/kitty"
+                app:roundRadius="4dp"
                 app:shape="round_rectangle" />
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:id="@+id/rightTop"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_below="@id/leftTop"
-                android:layout_marginTop="16dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                app:rightTopRadius="24dp"
-                app:shape="round_rectangle" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/image_view_scale_type" />
+        </LinearLayout>
 
-            <com.sml.mass.RadiusImageView.RadiusImageView
-                android:id="@+id/rightBottom"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/leftBottom"
-                android:layout_marginTop="16dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                app:rightBottomRadius="24dp"
-                app:shape="round_rectangle" />
-        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:padding="16dp"></LinearLayout>
 
-        <!--<Button-->
-        <!--android:id="@+id/btn"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:text="START CUSTOMIZE"-->
-        <!--android:textAllCaps="false"-->
-        <!--android:textSize="10dp" />-->
-
-        <!--<com.sml.mass.RadiusImageView.RadiusImageView-->
-        <!--android:id="@+id/custom"-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:src="@drawable/ic_launcher_background" />-->
-
-        <!--<LinearLayout-->
-        <!--android:id="@+id/container"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical">-->
-
-        <!--</LinearLayout>-->
     </LinearLayout>
+
 </ScrollView>
