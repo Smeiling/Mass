@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             override fun onPageScrollStateChanged(state: Int) {
             }
         })
+
+        ll_component.setOnClickListener { view_pager?.setCurrentItem(0, true) }
+        ll_tools.setOnClickListener { view_pager?.setCurrentItem(1, true) }
+
     }
 
     fun updateBottomBar(index: Int) {

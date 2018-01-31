@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sml.mass.R;
+import com.sml.mass.adapter.WidgetsAdapter;
 import com.sml.mass.model.GroupItem;
 import com.sml.mass.model.WidgetItem;
 
@@ -26,6 +27,7 @@ import java.util.List;
 public class ComponentsFragment extends Fragment {
 
     private ExpandableListView listView;
+    private WidgetsAdapter adapter;
 
     @Nullable
     @Override
@@ -72,10 +74,11 @@ public class ComponentsFragment extends Fragment {
             groupItem.setChildList(widgetList);
             groupList.add(groupItem);
         }
-        updateListWithData();
+        updateListWithData(groupList);
     }
 
-    private void updateListWithData() {
-
+    private void updateListWithData(List<GroupItem> groupList) {
+        adapter = new WidgetsAdapter(groupList);
+        listView.setAdapter(adapter);
     }
 }

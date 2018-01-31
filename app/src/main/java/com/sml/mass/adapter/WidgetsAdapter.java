@@ -1,15 +1,14 @@
 package com.sml.mass.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sml.mass.R;
-import com.sml.mass.model.WidgetItem;
+import com.sml.mass.model.GroupItem;
 
 import java.util.List;
 
@@ -17,57 +16,84 @@ import java.util.List;
  * Created by Smeiling on 2018/1/19.
  */
 
-public class WidgetsAdapter extends BaseAdapter {
+public class WidgetsAdapter extends BaseExpandableListAdapter {
 
-    private Context context;
-    private List<WidgetItem> items;
-    private LayoutInflater inflater;
+    private List<GroupItem> groupList;
 
-    public WidgetsAdapter(Context context, List<WidgetItem> items) {
-        this.context = context;
-        this.items = items;
-        this.inflater = LayoutInflater.from(context);
+    public WidgetsAdapter(List<GroupItem> groupList) {
+        this.groupList = groupList;
     }
 
     @Override
-    public int getCount() {
-        if (items != null) {
-            return items.size();
-        }
-        return 0;
+    public int getGroupCount() {
+        return groupList.size();
     }
 
     @Override
-    public WidgetItem getItem(int position) {
-        if (items != null) {
-            return items.get(position);
-        }
-        return null;
+    public int getChildrenCount(int groupPosition) {
+        return groupList.get(groupPosition).getChildList().size();
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public Object getGroup(int groupPosition) {
+        return groupList.get(groupPosition);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public Object getChild(int groupPosition, int childPosition) {
+        return groupList.get(groupPosition).getChildList().get(childPosition);
+    }
+
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_layout, null);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        viewHolder.title.setText(getItem(position).getWidgetName());
-        viewHolder.icon.setImageResource(getItem(position).getWidgetIcon());
-
+        viewHolder.title.setText(groupList.get(groupPosition).getGroupName());
+        viewHolder.icon.setImageResource(R.drawable.kitty);
         return convertView;
     }
 
-    private static class ViewHolder {
+    @Override
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.child_item_layout, null);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        viewHolder.title.setText(groupList.get(groupPosition).getChildList().get(childPosition).getWidgetName());
+        return convertView;
+    }
+
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return false;
+    }
+
+    public class ViewHolder {
         TextView title;
         ImageView icon;
 
