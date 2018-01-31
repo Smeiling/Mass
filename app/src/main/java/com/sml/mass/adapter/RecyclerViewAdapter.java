@@ -23,9 +23,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<WidgetItem> mValues;
     private GradientRecyclerViewActivity.OnListFragmentInteractionListener mListener;
 
-    public RecyclerViewAdapter(List<WidgetItem> items, GradientRecyclerViewActivity.OnListFragmentInteractionListener listener) {
+    public RecyclerViewAdapter(List<WidgetItem> items) {
         mValues = items;
-        mListener = listener;
     }
 
     public void updateItems(List<WidgetItem> newList) {

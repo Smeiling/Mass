@@ -22,7 +22,6 @@ public class GradientRecyclerViewActivity extends AppCompatActivity {
 
     private GradientRecyclerView recyclerView;
     private List<WidgetItem> itemList = new ArrayList<>();
-    private OnListFragmentInteractionListener mListener;
 
     private RecyclerViewAdapter adapter;
     private ImageView btnSend;
@@ -46,7 +45,7 @@ public class GradientRecyclerViewActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new RecyclerViewAdapter(itemList, mListener);
+        adapter = new RecyclerViewAdapter(itemList);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
