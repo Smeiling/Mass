@@ -1,22 +1,18 @@
 package com.sml.mass.activity;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.Shader;
-import android.graphics.Xfermode;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.sml.mass.R;
 import com.sml.mass.adapter.RecyclerViewAdapter;
+import com.sml.mass.components.list.GradientRecyclerView;
 import com.sml.mass.model.WidgetItem;
 
 import java.util.ArrayList;
@@ -24,83 +20,63 @@ import java.util.List;
 
 public class GradientRecyclerViewActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private List<WidgetItem> itemList;
+    private GradientRecyclerView recyclerView;
+    private List<WidgetItem> itemList = new ArrayList<>();
     private OnListFragmentInteractionListener mListener;
+
+    private RecyclerViewAdapter adapter;
+    private ImageView btnSend;
+    private EditText etMsg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gradient_recycler_view);
 
-        loadData();
-
-        mListener = new OnListFragmentInteractionListener() {
+        etMsg = findViewById(R.id.et_msg);
+        btnSend = findViewById(R.id.btn_send);
+        btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onListFragmentInteraction(WidgetItem widgetItem) {
-
+            public void onClick(View v) {
+                if (etMsg != null && !TextUtils.isEmpty(etMsg.getText().toString())) {
+                    addData(etMsg.getText().toString());
+                    etMsg.setText("");
+                }
             }
-        };
+        });
+
+        adapter = new RecyclerViewAdapter(itemList, mListener);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecyclerViewAdapter(itemList, mListener));
         recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        doTopGradualEffect();
+        recyclerView.setAdapter(adapter);
     }
 
-    private Paint mPaint;
-    private LinearGradient linearGradient;
-    private int layerId;
-
-    private void doTopGradualEffect() {
-        if (recyclerView == null) {
-            return;
+    private void addData(String msg) {
+        WidgetItem widgetItem = new WidgetItem();
+        widgetItem.setWidgetName(msg);
+        widgetItem.setWidgetIcon(R.drawable.kitty);
+        itemList.add(widgetItem);
+        adapter.updateItems(itemList);
+        recyclerView.scrollToPosition(itemList.size() - 1);
+        if (itemList.size() == 7) {
+            recyclerView.addGradientEffect();
+            recyclerView.invalidate();
         }
-
-        mPaint = new Paint();
-        final Xfermode xfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
-        mPaint.setXfermode(xfermode);
-        linearGradient = new LinearGradient(0.0f, 0.0f, 0.0f, 200.0f, new int[]{Color.TRANSPARENT, Color.WHITE}, null, Shader.TileMode.CLAMP);
-
-        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            // 在RecyclerView整体上做效果
-            @Override
-            public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
-                super.onDrawOver(canvas, parent, state);
-
-                mPaint.setXfermode(xfermode);
-                mPaint.setShader(linearGradient);
-                canvas.drawRect(0.0f, 0.0f, parent.getRight(), 200.0f, mPaint);
-                mPaint.setXfermode(null);
-                canvas.restoreToCount(layerId);
-            }
-
-            @Override
-            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-                super.onDraw(c, parent, state);
-                layerId = c.saveLayer(0.0f, 0.0f, (float) parent.getWidth(), (float) parent.getHeight(), mPaint, Canvas.ALL_SAVE_FLAG);
-            }
-
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-            }
-        });
     }
 
-    private void loadData() {
-        itemList = new ArrayList<>();
-        WidgetItem widgetItem;
-        for (int i = 0; i < 25; i++) {
-            widgetItem = new WidgetItem();
-            widgetItem.setWidgetName("smlsmlsml " + i);
-            widgetItem.setWidgetIcon(R.drawable.kitty);
-            itemList.add(widgetItem);
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recyclerView.scrollToPosition(itemList.size() - 1);
+
     }
 
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(WidgetItem widgetItem);
     }
+
+
 }

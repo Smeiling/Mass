@@ -28,10 +28,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         mListener = listener;
     }
 
+    public void updateItems(List<WidgetItem> newList) {
+        this.mValues = newList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_layout, parent, false);
+                .inflate(R.layout.transparent_list_item, parent, false);
         return new ViewHolder(view);
     }
 
