@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.sml.mass.R;
 import com.sml.mass.activity.GradientRecyclerViewActivity;
-import com.sml.mass.model.WidgetItem;
+import com.sml.mass.model.ChildItem;
 
 import java.util.List;
 
@@ -20,14 +20,14 @@ import java.util.List;
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<WidgetItem> mValues;
+    private List<ChildItem> mValues;
     private GradientRecyclerViewActivity.OnListFragmentInteractionListener mListener;
 
-    public RecyclerViewAdapter(List<WidgetItem> items) {
+    public RecyclerViewAdapter(List<ChildItem> items) {
         mValues = items;
     }
 
-    public void updateItems(List<WidgetItem> newList) {
+    public void updateItems(List<ChildItem> newList) {
         this.mValues = newList;
         notifyDataSetChanged();
     }
@@ -64,7 +64,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public final View mView;
         public final TextView mTitle;
         public final ImageView mIcon;
-        public WidgetItem mItem;
+        public ChildItem mItem;
 
         public ViewHolder(View view) {
             super(view);

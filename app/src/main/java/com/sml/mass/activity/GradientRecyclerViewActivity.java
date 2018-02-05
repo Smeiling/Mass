@@ -1,8 +1,6 @@
 package com.sml.mass.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -13,7 +11,7 @@ import android.widget.ImageView;
 import com.sml.mass.R;
 import com.sml.mass.adapter.RecyclerViewAdapter;
 import com.sml.mass.components.list.GradientRecyclerView;
-import com.sml.mass.model.WidgetItem;
+import com.sml.mass.model.ChildItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,7 @@ import java.util.List;
 public class GradientRecyclerViewActivity extends AppCompatActivity {
 
     private GradientRecyclerView recyclerView;
-    private List<WidgetItem> itemList = new ArrayList<>();
+    private List<ChildItem> itemList = new ArrayList<>();
 
     private RecyclerViewAdapter adapter;
     private ImageView btnSend;
@@ -54,10 +52,10 @@ public class GradientRecyclerViewActivity extends AppCompatActivity {
     }
 
     private void addData(String msg) {
-        WidgetItem widgetItem = new WidgetItem();
-        widgetItem.setWidgetName(msg);
-        widgetItem.setWidgetIcon(R.drawable.kitty);
-        itemList.add(widgetItem);
+        ChildItem childItem = new ChildItem();
+        childItem.setWidgetName(msg);
+        childItem.setWidgetIcon(R.drawable.kitty);
+        itemList.add(childItem);
         adapter.updateItems(itemList);
         recyclerView.scrollToPosition(itemList.size() - 1);
         if (itemList.size() == 7) {
@@ -74,7 +72,7 @@ public class GradientRecyclerViewActivity extends AppCompatActivity {
     }
 
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(WidgetItem widgetItem);
+        void onListFragmentInteraction(ChildItem childItem);
     }
 
 

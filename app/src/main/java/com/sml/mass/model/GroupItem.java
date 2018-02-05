@@ -8,9 +8,16 @@ import java.util.List;
  * @Description:
  */
 public class GroupItem {
+    public boolean isExpanded;
+
     private String groupName;
     private int groupIcon;
-    private List<WidgetItem> childList;
+    private List<ChildItem> childList;
+
+    public GroupItem(String groupName) {
+        this.groupName = groupName;
+        this.isExpanded = false;
+    }
 
     public String getGroupName() {
         return groupName;
@@ -28,11 +35,12 @@ public class GroupItem {
         this.groupIcon = groupIcon;
     }
 
-    public List<WidgetItem> getChildList() {
+    public List<ChildItem> getChildList() {
         return childList;
     }
 
-    public void setChildList(List<WidgetItem> childList) {
+    public void setChildList(List<ChildItem> childList) {
+
         this.childList = childList;
     }
 }

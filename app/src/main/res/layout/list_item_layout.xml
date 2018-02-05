@@ -23,6 +23,7 @@
 
         <ImageView
             android:id="@+id/icon"
+            android:src="@mipmap/icon_components"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:tint="#666666" />

@@ -4,7 +4,7 @@ package com.sml.mass.model;
  * Created by Smeiling on 2018/1/19.
  */
 
-public class WidgetItem {
+public class ChildItem {
 
     private String widgetName;
     private int widgetIcon;
