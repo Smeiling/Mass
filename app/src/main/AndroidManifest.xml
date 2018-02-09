@@ -9,18 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".activity.ImageSpannableActivity" />
         <activity android:name=".RecyclerView.RecyclerViewActivity" />
         <activity android:name=".activity.RadiusImageViewActivity" />
         <activity android:name=".ConstraintLayout.ConstraintActivity" />
-        <activity android:name=".activity.GradientRecyclerViewActivity"></activity>
+        <activity android:name=".activity.GradientRecyclerViewActivity" />
+        <activity android:name=".activity.ZoomableImageViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
