@@ -2,13 +2,10 @@ package com.sml.mass.adapter;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +16,7 @@ import com.sml.mass.R;
 import com.sml.mass.model.ChildItem;
 import com.sml.mass.model.GroupItem;
 import com.sml.mass.utils.TreeRecyclerViewHelper;
+import com.sml.mass.utils.ViewUtils;
 
 import java.util.List;
 
@@ -97,50 +95,44 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    public void addRippleEffect(View view) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            RippleDrawable ripple = new RippleDrawable(ColorStateList.valueOf(0x80999999),
-                    null, new ColorDrawable(Color.WHITE));
-            ripple.setRadius(RippleDrawable.RADIUS_AUTO);
-            view.setForeground(ripple);
-        } else if (Build.VERSION.SDK_INT >= 21) {
-            if (view.getBackground() != null && !(view.getBackground() instanceof RippleDrawable)) {
-                Drawable background = view.getBackground();
-                ColorStateList color = ColorStateList.valueOf(0x80999999);
-                background = new RippleDrawable(color, background,
-                        new ColorDrawable(Color.WHITE));
-                view.setBackground(background);
-            } else {
-                view.setBackground(ActivityCompat.getDrawable(view.getContext(), R.drawable.ripple_default));
-            }
-        }
-    }
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_ITEM:
                 ChildViewHolder childViewHolder = (ChildViewHolder) holder;
-                final ChildItem item = (ChildItem) mDataArrayList.get(position);
-                childViewHolder.childName.setText(item.getWidgetName());
+                final ChildItem childItem = (ChildItem) mDataArrayList.get(position);
+                childViewHolder.childName.setText(childItem.getWidgetName());
                 childViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        addRippleEffect(v);
-                        mItemClickListener.itemClicked(item);
+                        ViewUtils.addRippleEffect(v);
+                        mItemClickListener.itemClicked(childItem);
                     }
                 });
-                childViewHolder.childIcon.setImageResource(childViewHolder.childIcon.getContext().getResources().getIdentifier(
-                        item.getWidgetIcon(),
-                        "mipmap",
-                        childViewHolder.childIcon.getContext().getPackageName()
-                ));
+                if (!TextUtils.isEmpty(childItem.getWidgetIcon())) {
+                    childViewHolder.childIcon.setImageResource(childViewHolder.childIcon.getContext().getResources().getIdentifier(
+                            childItem.getWidgetIcon(),
+                            "mipmap",
+                            childViewHolder.childIcon.getContext().getPackageName()
+                    ));
+                } else {
+                    childViewHolder.childIcon.setImageResource(R.mipmap.icon_default);
+                }
                 break;
             case VIEW_TYPE_GROUP:
                 final GroupViewHolder groupViewHolder = (GroupViewHolder) holder;
                 final GroupItem groupItem = (GroupItem) mDataArrayList.get(position);
                 groupViewHolder.groupName.setText(groupItem.getGroupName());
+                if (!TextUtils.isEmpty(groupItem.getGroupIcon())) {
+                    groupViewHolder.groupIcon.setImageResource(groupViewHolder.groupIcon.getContext().getResources().getIdentifier(
+                            groupItem.getGroupIcon(),
+                            "mipmap",
+                            groupViewHolder.groupIcon.getContext().getPackageName()
+                    ));
+                } else {
+                    groupViewHolder.groupIcon.setImageResource(R.mipmap.icon_default);
+                }
                 //展开/收起点击监听
                 groupViewHolder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -148,9 +140,11 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                         onExpandStateChangeListener.onExpandStateChange(position, groupItem, !groupItem.isExpanded);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             if (groupItem.isExpanded) {
-                                groupViewHolder.groupIcon.setSelected(true);
+                                groupViewHolder.groupIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E6E6E6")));
+                                groupViewHolder.groupName.setTextColor(Color.parseColor("#E6E6E6"));
                             } else {
-                                groupViewHolder.groupIcon.setSelected(false);
+                                groupViewHolder.groupIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#2C2C2C")));
+                                groupViewHolder.groupName.setTextColor(Color.parseColor("#2C2C2C"));
                             }
                         }
                     }
@@ -158,6 +152,8 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 break;
             case VIEW_TYPE_HEADER:
                 HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
+                headerViewHolder.icon.setImageResource(R.mipmap.icon_components);
+                headerViewHolder.description.setText(R.string.components_description);
                 break;
             default:
                 break;
@@ -180,9 +176,13 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     protected static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        ImageView icon;
+        TextView description;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
+            icon = itemView.findViewById(R.id.main_icon);
+            description = itemView.findViewById(R.id.main_description);
         }
     }
 

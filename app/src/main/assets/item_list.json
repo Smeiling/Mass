@@ -10,44 +10,44 @@
       },
       {
         "widgetName": "FolderTextView",
-        "widgetIcon": "icon_radius_image_view",
+        "widgetIcon": "",
         "className": ""
       },
       {
         "widgetName": "ZoomableImageView",
-        "widgetIcon": "icon_radius_image_view",
+        "widgetIcon": "icon_zoomable_image_view",
         "className": "com.sml.mass.activity.ZoomableImageViewActivity"
       }
     ]
   },
   {
-    "groupName": "Container",
-    "groupIcon": "icon_component",
+    "groupName": "Containers",
+    "groupIcon": "icon_container",
     "childList": [
       {
         "widgetName": "FloatLayout",
-        "widgetIcon": "icon_radius_image_view",
+        "widgetIcon": "icon_float_layout",
         "className": ""
       },
       {
         "widgetName": "ImageViewPager",
-        "widgetIcon": "icon_radius_image_view",
+        "widgetIcon": "",
         "className": ""
       }
     ]
   },
   {
-    "groupName": "List",
-    "groupIcon": "icon_component",
+    "groupName": "Collections",
+    "groupIcon": "icon_collections",
     "childList": [
       {
         "widgetName": "GradientRecyclerView",
-        "widgetIcon": "icon_radius_image_view",
+        "widgetIcon": "",
         "className": "com.sml.mass.activity.GradientRecyclerViewActivity"
       },
       {
         "widgetName": "HorizontalViewPager",
-        "widgetIcon": "icon_radius_image_view",
+        "widgetIcon": "",
         "className": ""
       }
     ]

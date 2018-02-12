@@ -1,6 +1,7 @@
 package com.sml.mass.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,11 +44,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mTitle.setText(mValues.get(position).getWidgetName());
-        holder.mIcon.setImageResource(
-                holder.mIcon.getContext().getResources().getIdentifier(mValues.get(position).getWidgetIcon(),
-                        "drawable",
-                        holder.mIcon.getContext().getPackageName()));
-        //holder.mIcon.setImageResource(mValues.get(position).getWidgetIcon());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.sml.mass.adapter.TreeRecyclerViewAdapter;
-import com.sml.mass.model.GroupItem;
 import com.sml.mass.model.ChildItem;
+import com.sml.mass.model.GroupItem;
 
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -52,7 +51,6 @@ public class TreeRecyclerViewHelper {
             }
         }
     };
-
 
     /**
      * 构造函数
@@ -103,10 +101,8 @@ public class TreeRecyclerViewHelper {
 
     public void expandData(GroupItem group, int childCount) {
         generateDataList();
-
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         recyclerView.setLayoutParams(params);
-
         treeRecyclerViewAdapter.notifyItemRangeInserted(mDataArrayList.indexOf(group) + 1, childCount);
     }
 
@@ -130,13 +126,13 @@ public class TreeRecyclerViewHelper {
     /**
      * Add group
      *
-     * @param groupName groupName
-     * @param items     groupItems
+     * @param group group
+     * @param items groupItems
      */
-    public void addGroupItem(String groupName, List<ChildItem> items) {
-        GroupItem newGroupItem;
+    public void addGroupItem(GroupItem group, List<ChildItem> items) {
+        GroupItem newGroupItem = group;
         // Name->Group
-        mGroupItemMap.put(groupName, (newGroupItem = new GroupItem(groupName)));
+        mGroupItemMap.put(group.getGroupName(), newGroupItem);
         // Group->childItems
         mGroupItemDataMap.put(newGroupItem, items);
     }
@@ -179,7 +175,7 @@ public class TreeRecyclerViewHelper {
         // 添加头部
         addHeaderItem();
         for (GroupItem group : groupList) {
-            addGroupItem(group.getGroupName(), group.getChildList());
+            addGroupItem(group, group.getChildList());
         }
         lastGroup = groupList.get(groupList.size() - 1);
         notifyDataSetChanged();

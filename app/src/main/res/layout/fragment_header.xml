@@ -13,8 +13,7 @@
         android:layout_height="64dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:src="@drawable/ic_launcher_background"
-        android:tint="@color/colorText" />
+        android:src="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/main_description"
