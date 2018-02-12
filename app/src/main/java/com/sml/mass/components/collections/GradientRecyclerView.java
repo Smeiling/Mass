@@ -1,4 +1,4 @@
-package com.sml.mass.components.list;
+package com.sml.mass.components.collections;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.sml.mass.R;
 import com.sml.mass.adapter.RecyclerViewAdapter;
-import com.sml.mass.components.list.GradientRecyclerView;
+import com.sml.mass.components.collections.GradientRecyclerView;
 import com.sml.mass.model.ChildItem;
 
 import java.util.ArrayList;

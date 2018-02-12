@@ -113,7 +113,7 @@
                 android:layout_height="60dp"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/kitty"
-                app:borderColor="#3399FF"
+                app:borderColor="#FF4081"
                 app:borderWidth="4dp"
                 app:shape="oval" />
 

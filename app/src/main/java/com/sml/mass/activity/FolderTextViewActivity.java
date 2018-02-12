@@ -15,8 +15,9 @@ import android.widget.TextView;
 
 import com.sml.mass.R;
 import com.sml.mass.components.basic.FolderTextView;
+import com.sml.mass.utils.ViewUtils;
 
-public class ImageSpannableActivity extends AppCompatActivity {
+public class FolderTextViewActivity extends AppCompatActivity {
 
     private TextView span;
     private FolderTextView folderTextView;
@@ -28,7 +29,7 @@ public class ImageSpannableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_spannable);
+        setContentView(R.layout.activity_folder_text_view);
 
         span = findViewById(R.id.span);
         folderTextView = findViewById(R.id.folder);
@@ -40,11 +41,11 @@ public class ImageSpannableActivity extends AppCompatActivity {
         imageSpan = new TagSpan(drawable, DynamicDrawableSpan.ALIGN_BOTTOM);
         spannableString.setSpan(imageSpan, 0, 3, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         span.setText(spannableString);
-        //folderTextView.setSpan(imageSpan, 0, 3, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 
         addImageSpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ViewUtils.addRippleEffect(v);
                 if (imageSpan != null && folderTextView != null) {
                     folderTextView.setSpan(imageSpan, 0, 3, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                 }

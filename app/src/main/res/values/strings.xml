@@ -11,4 +11,7 @@
         共支持4种ScaleType，包括CENTER、CENTER_CROP、MATRIX、FIT_XY，默认值为CENTER_CROP。
     </string>
     <string name="radius_image_view_code">使用Java代码创建RadiusImageView实例。\n点我试试～</string>
+    <string name="label_vertical_view_pager">VerticalViewPager</string>
+    <string name="label_gradient_recycler_view">GradientRecyclerView</string>
+    <string name="label_folder_text_view">FolderTextView</string>
 </resources>

@@ -11,7 +11,7 @@
       {
         "widgetName": "FolderTextView",
         "widgetIcon": "",
-        "className": ""
+        "className": "com.sml.mass.activity.FolderTextViewActivity"
       },
       {
         "widgetName": "ZoomableImageView",
@@ -42,13 +42,13 @@
     "childList": [
       {
         "widgetName": "GradientRecyclerView",
-        "widgetIcon": "",
+        "widgetIcon": "icon_gradient_recycler_view",
         "className": "com.sml.mass.activity.GradientRecyclerViewActivity"
       },
       {
-        "widgetName": "HorizontalViewPager",
-        "widgetIcon": "",
-        "className": ""
+        "widgetName": "VerticalViewPager",
+        "widgetIcon": "icon_vertical_view_pager",
+        "className": "com.sml.mass.activity.VerticalViewPagerActivity"
       }
     ]
   }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:gravity="center"
+            android:text="@string/label_folder_text_view"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginBottom="20dp"
+            android:background="#ffffff" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/span"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="10dp"
+        android:text="在Android中，这种应用程序跳转行为很常见，所以您的应用程序必须正确处理这些流程。请记住，移动设备是资源受限，所以在任何时候，操作系统可能需要杀死一些应用程序，以腾出空间给新的的应用或进程。" />
+
+    <Button
+        android:id="@+id/add_image_span"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorWhite"
+        android:text="Add Image Span"
+        android:textColor="@color/colorText" />
+
+    <com.sml.mass.components.basic.FolderTextView
+        android:id="@+id/folder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="10dp"
+        android:text="TAG 你应该关注的最重要的事情是在你的应用程序中，将所有代码写入Activity或Fragment是一个常见的错误。任何不处理UI或操作系统交互的代码都不应该在这些类中。尽可能保持精简可以避免许多生命周期相关的问题。"
+        app:foldLine="2"
+        app:foldText="收起"
+        app:tailTextColor="@color/colorAccent"
+        app:unFoldText="阅读全文" />
+
+    <com.sml.mass.components.basic.FolderTextView
+        android:id="@+id/folder2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="10dp"
+        android:text="由于应用程序组件是短暂的，它们的生命周期（创建和销毁时）不在您的控制之下，因此您不应该在应用程序组件中存储任何应用程序数据或状态，并且应用程序组件不应相互依赖。"
+        app:foldLine="2"
+        app:foldText="收起"
+        app:tailTextColor="@color/colorAccent"
+        app:unFoldText="展开全部" />
+
+
+</LinearLayout>

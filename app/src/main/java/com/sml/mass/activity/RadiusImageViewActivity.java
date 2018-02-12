@@ -36,7 +36,7 @@ public class RadiusImageViewActivity extends AppCompatActivity {
         // 圆角Radius值
         radiusImageView.setRoundRadius(36);
         // 边框设置
-        radiusImageView.setBorderColor(Color.RED);
+        radiusImageView.setBorderColor(Color.parseColor("#FF4081"));
         radiusImageView.setBorderWidth(12);
         // 设置图片
 //        radiusImageView.setImageResource(R.drawable.img_2);
