@@ -54,7 +54,7 @@ public class GradientRecyclerViewActivity extends AppCompatActivity {
     private void addData(String msg) {
         ChildItem childItem = new ChildItem();
         childItem.setWidgetName(msg);
-        childItem.setWidgetIcon(R.drawable.kitty);
+//        childItem.setWidgetIcon(R.drawable.kitty);
         itemList.add(childItem);
         adapter.updateItems(itemList);
         recyclerView.scrollToPosition(itemList.size() - 1);

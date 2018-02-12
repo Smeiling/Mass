@@ -7,7 +7,7 @@ package com.sml.mass.model;
 public class ChildItem {
 
     private String widgetName;
-    private int widgetIcon;
+    private String widgetIcon;
     private String className;
 
 
@@ -19,11 +19,11 @@ public class ChildItem {
         this.widgetName = widgetName;
     }
 
-    public int getWidgetIcon() {
+    public String getWidgetIcon() {
         return widgetIcon;
     }
 
-    public void setWidgetIcon(int widgetIcon) {
+    public void setWidgetIcon(String widgetIcon) {
         this.widgetIcon = widgetIcon;
     }
 

@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginBottom="20dp"
-                android:background="#333333" />
+                android:background="#ffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,7 +51,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="@string/rectangle_image_view" />
+                android:text="@string/rectangle_image_view"
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,7 +73,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="@string/oval_image_view" />
+                android:text="@string/oval_image_view"
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <LinearLayout
@@ -94,7 +96,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="@string/round_rect_image_view" />
+                android:text="@string/round_rect_image_view"
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <LinearLayout
@@ -118,7 +121,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="@string/border_image_view" />
+                android:text="@string/border_image_view"
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <LinearLayout
@@ -142,7 +146,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="@string/image_view_scale_type" />
+                android:text="@string/image_view_scale_type"
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <LinearLayout

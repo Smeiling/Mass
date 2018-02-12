@@ -2,7 +2,11 @@ package com.sml.mass.adapter;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -93,6 +97,25 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
+    public void addRippleEffect(View view) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            RippleDrawable ripple = new RippleDrawable(ColorStateList.valueOf(0x80999999),
+                    null, new ColorDrawable(Color.WHITE));
+            ripple.setRadius(RippleDrawable.RADIUS_AUTO);
+            view.setForeground(ripple);
+        } else if (Build.VERSION.SDK_INT >= 21) {
+            if (view.getBackground() != null && !(view.getBackground() instanceof RippleDrawable)) {
+                Drawable background = view.getBackground();
+                ColorStateList color = ColorStateList.valueOf(0x80999999);
+                background = new RippleDrawable(color, background,
+                        new ColorDrawable(Color.WHITE));
+                view.setBackground(background);
+            } else {
+                view.setBackground(ActivityCompat.getDrawable(view.getContext(), R.drawable.ripple_default));
+            }
+        }
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
@@ -104,22 +127,20 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 childViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        addRippleEffect(v);
                         mItemClickListener.itemClicked(item);
                     }
                 });
-
+                childViewHolder.childIcon.setImageResource(childViewHolder.childIcon.getContext().getResources().getIdentifier(
+                        item.getWidgetIcon(),
+                        "mipmap",
+                        childViewHolder.childIcon.getContext().getPackageName()
+                ));
                 break;
             case VIEW_TYPE_GROUP:
                 final GroupViewHolder groupViewHolder = (GroupViewHolder) holder;
                 final GroupItem groupItem = (GroupItem) mDataArrayList.get(position);
                 groupViewHolder.groupName.setText(groupItem.getGroupName());
-//                groupViewHolder.groupName.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        mItemClickListener.itemClicked(groupItem);
-//                    }
-//                });
-
                 //展开/收起点击监听
                 groupViewHolder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -127,9 +148,9 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                         onExpandStateChangeListener.onExpandStateChange(position, groupItem, !groupItem.isExpanded);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             if (groupItem.isExpanded) {
-                                groupViewHolder.groupIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#999999")));
+                                groupViewHolder.groupIcon.setSelected(true);
                             } else {
-                                groupViewHolder.groupIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#3399FF")));
+                                groupViewHolder.groupIcon.setSelected(false);
                             }
                         }
                     }
@@ -185,11 +206,13 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     protected static class ChildViewHolder extends RecyclerView.ViewHolder {
 
         View itemView;
+        ImageView childIcon;
         TextView childName;
 
         public ChildViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
+            this.childIcon = itemView.findViewById(R.id.icon);
             this.childName = itemView.findViewById(R.id.title);
         }
     }

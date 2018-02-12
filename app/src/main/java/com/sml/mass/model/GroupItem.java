@@ -11,7 +11,7 @@ public class GroupItem {
     public boolean isExpanded;
 
     private String groupName;
-    private int groupIcon;
+    private String groupIcon;
     private List<ChildItem> childList;
 
     public GroupItem(String groupName) {
@@ -27,11 +27,11 @@ public class GroupItem {
         this.groupName = groupName;
     }
 
-    public int getGroupIcon() {
+    public String getGroupIcon() {
         return groupIcon;
     }
 
-    public void setGroupIcon(int groupIcon) {
+    public void setGroupIcon(String groupIcon) {
         this.groupIcon = groupIcon;
     }
 

@@ -1,0 +1,55 @@
+[
+  {
+    "groupName": "Basic Components",
+    "groupIcon": "icon_component",
+    "childList": [
+      {
+        "widgetName": "RadiusImageView",
+        "widgetIcon": "icon_radius_image_view",
+        "className": "com.sml.mass.activity.RadiusImageViewActivity"
+      },
+      {
+        "widgetName": "FolderTextView",
+        "widgetIcon": "icon_radius_image_view",
+        "className": ""
+      },
+      {
+        "widgetName": "ZoomableImageView",
+        "widgetIcon": "icon_radius_image_view",
+        "className": "com.sml.mass.activity.ZoomableImageViewActivity"
+      }
+    ]
+  },
+  {
+    "groupName": "Container",
+    "groupIcon": "icon_component",
+    "childList": [
+      {
+        "widgetName": "FloatLayout",
+        "widgetIcon": "icon_radius_image_view",
+        "className": ""
+      },
+      {
+        "widgetName": "ImageViewPager",
+        "widgetIcon": "icon_radius_image_view",
+        "className": ""
+      }
+    ]
+  },
+  {
+    "groupName": "List",
+    "groupIcon": "icon_component",
+    "childList": [
+      {
+        "widgetName": "GradientRecyclerView",
+        "widgetIcon": "icon_radius_image_view",
+        "className": "com.sml.mass.activity.GradientRecyclerViewActivity"
+      },
+      {
+        "widgetName": "HorizontalViewPager",
+        "widgetIcon": "icon_radius_image_view",
+        "className": ""
+      }
+    ]
+  }
+]

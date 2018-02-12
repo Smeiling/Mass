@@ -58,6 +58,7 @@ public class RadiusImageViewActivity extends AppCompatActivity {
         // 说明文字
         TextView textView = new TextView(this);
         textView.setText(R.string.radius_image_view_code);
+        textView.setTextColor(Color.parseColor("#333333"));
         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         textParams.leftMargin = 48;
         textView.setLayoutParams(textParams);
