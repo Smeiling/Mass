@@ -26,4 +26,9 @@
     <declare-styleable name="VerticalViewPager">
         <attr name="isVertical" format="boolean" />
     </declare-styleable>
+
+
+    <declare-styleable name="ZoomableImageView">
+        <attr name="ziv_zoomable" format="boolean" />
+    </declare-styleable>
 </resources>

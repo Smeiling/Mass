@@ -1,20 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000020"
-    tools:context="com.sml.mass.activity.ZoomableImageViewActivity">
+    android:orientation="vertical">
 
-    <com.sml.mass.components.basic.ZoomableImageView
-        android:id="@+id/image"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:src="@drawable/kitty"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:gravity="center"
+            android:text="@string/label_zoomable_image_view"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginBottom="20dp"
+            android:background="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="支持双击放大/缩小，手势缩放/滑动图片。" />
+
+        <Switch
+            android:id="@+id/zoomable_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:checked="true"
+            android:text="isZoomable" />
+
+        <com.sml.mass.components.basic.ZoomableImageView
+            android:id="@+id/zoomable_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:src="@drawable/kitty" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="#999999" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="在不可缩放状态下支持设置图片的ScaleType，效果与ImageView相同。在可缩放状态下默认为FIT_CENTER。" />
+
+
+        <com.sml.mass.components.basic.ZoomableImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/kitty"
+            app:ziv_zoomable="false" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.sml.mass.components.basic.ZoomableImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorLightGray"
+                android:scaleType="fitEnd"
+                android:src="@drawable/kitty"
+                app:ziv_zoomable="false" />
+
+            <com.sml.mass.components.basic.ZoomableImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorLightGray"
+                android:scaleType="fitStart"
+                android:src="@drawable/kitty"
+                app:ziv_zoomable="false" />
+
+            <com.sml.mass.components.basic.ZoomableImageView
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+
+                android:layout_weight="1"
+                android:background="@color/colorLightGray"
+                android:scaleType="fitCenter"
+                android:src="@drawable/kitty"
+                app:ziv_zoomable="false" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
