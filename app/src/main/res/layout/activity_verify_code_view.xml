@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sml.mass.activity.VerifyCodeViewActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:gravity="center"
+                android:text="@string/label_verify_code_view"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="20dp"
+                android:background="#ffffff" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/label_correct_code"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content" />
+        <com.sml.mass.components.basic.VerifyCodeView
+            android:id="@+id/verify_code_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:vcv_codeCount="4"
+            app:vcv_codeTextColor="#3399ff"
+            app:vcv_codeTextSize="18sp"
+            app:vcv_cursorColor="#3399ff"
+            app:vcv_shakeDistance="18dp" />
+
+    </LinearLayout>
+</LinearLayout>

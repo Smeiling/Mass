@@ -17,6 +17,11 @@
         "widgetName": "ZoomableImageView",
         "widgetIcon": "icon_zoomable_image_view",
         "className": "com.sml.mass.activity.ZoomableImageViewActivity"
+      },
+      {
+        "widgetName": "VerifyCodeView",
+        "widgetIcon": "",
+        "className": "com.sml.mass.activity.VerifyCodeViewActivity"
       }
     ]
   },

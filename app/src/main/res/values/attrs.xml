@@ -31,4 +31,17 @@
     <declare-styleable name="ZoomableImageView">
         <attr name="ziv_zoomable" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="VerifyCodeView">
+        <attr name="vcv_codeCount" format="integer" />
+        <attr name="vcv_codeTextColor" format="color" />
+        <attr name="vcv_codeTextSize" format="dimension" />
+        <attr name="vcv_codeGapWidth" format="dimension" />
+        <attr name="vcv_cursorColor" format="color" />
+        <attr name="vcv_enableShake" format="boolean" />
+        <attr name="vcv_enableVibrate" format="boolean" />
+        <attr name="vcv_shakeDistance" format="dimension" />
+        <attr name="vcv_codeBackground" format="dimension" />
+
+    </declare-styleable>
 </resources>

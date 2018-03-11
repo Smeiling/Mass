@@ -15,4 +15,6 @@
     <string name="label_gradient_recycler_view">GradientRecyclerView</string>
     <string name="label_folder_text_view">FolderTextView</string>
     <string name="label_zoomable_image_view">ZoomableImageView</string>
+    <string name="label_verify_code_view">VerifyCodeView</string>
+    <string name="label_correct_code">Correct code is 1123</string>
 </resources>
