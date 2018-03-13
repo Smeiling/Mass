@@ -1,5 +1,6 @@
 package com.sml.mass.components.basic;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +8,10 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputType;
@@ -20,7 +24,17 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.inputmethod.BaseInputConnection;
+import android.view.inputmethod.CompletionInfo;
+import android.view.inputmethod.CorrectionInfo;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.ExtractedText;
+import android.view.inputmethod.ExtractedTextRequest;
+import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.InputConnectionWrapper;
+import android.view.inputmethod.InputContentInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -270,13 +284,25 @@ public class VerifyCodeView extends LinearLayout {
     /**
      * Hide keyboard when code input finished.
      */
-    private void hideKeyboard() {
+    public void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             imm.hideSoftInputFromWindow(getWindowToken(), 0);
         }
 
     }
+
+    /**
+     * Force show inputmethod if need
+     */
+    public void showKeyboard() {
+        View view = codeViews.get(cursorIndex);
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+        }
+    }
+
 
     /**
      * Vibrate device when verify failed.
@@ -304,6 +330,27 @@ public class VerifyCodeView extends LinearLayout {
             ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(this,
                     "translationX", 0, shakeDistance, -shakeDistance, shakeDistance, -shakeDistance, shakeDistance - 10, -shakeDistance + 10, 6, -6, 0);
             objectAnimator.setDuration(1000);
+            objectAnimator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    clearCode();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
             objectAnimator.start();
         } catch (Exception e) {
             Log.e("VerifyCode", "Animate failed");
